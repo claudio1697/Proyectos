@@ -1,0 +1,48 @@
+from tkinter import *
+import datetime
+import time
+import winsound
+
+
+def alarm(set_alarm_timer):
+    while True:
+        time.sleep(1)
+        current_time = datetime.datetime.now()
+        now = current_time.strftime("%H:%M:%S")
+        date = current_time.strftime("%d:%m:%Y")
+        print("La fecha actual es:", date)
+        print(now)
+        if now == set_alarm_timer:
+            print("Despierta tio!!")
+        winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
+        break
+
+
+def hora_actual():
+    set_alarm_timer = f"{hour.get()}:{minu.get()}:{sec.get()}"
+    alarm(set_alarm_timer)
+
+
+clock = Tk()
+
+clock.title("CiberReloj")
+
+clock.geometry("400x200")
+
+Label(clock, text="Introduce la hora en formato de 24H!", fg="red", bg="black", font="Arial").place(
+    x=60, y=120)
+Label(clock, text="Hora Min Sec", font=60).place(x=110)
+Label(clock, text="Cuando te despiertas", fg="blue", relief="solid",
+      font=("Helvetica", 7, "bold")).place(x=0, y=29)
+
+hour = StringVar()
+minu = StringVar()
+sec = StringVar()
+
+Entry(clock, textvariable=hour, bg="pink", width=15).place(x=110, y=30)
+Entry(clock, textvariable=minu, bg="pink", width=15).place(x=150, y=30)
+Entry(clock, textvariable=sec, bg="pink", width=15).place(x=200, y=30)
+
+Button(clock, text="Set Alarm", fg="red", width=10, command=hora_actual).place(x=110, y=70)
+
+clock.mainloop()
